@@ -1,14 +1,16 @@
 # Site settings
-title: Your awesome title
-email: your-email@domain.com
+title: DCog
+email: json@sql.rehab
 description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Blogging is a form of distributed cognition (DCog).
+  I am writing these articles to help me better understand and remember the things I learn, 
+  primarily about computer science.
+  Writing about something really helps me fill in the gaps by spelling it all out. 
+  It's easy for me to think I understand something until I have to explain it. 
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "http://pages.dcog.io" # the base hostname & protocol for your site
+twitter_username: danielbushman
+github_username:  danielbushman
 
 # Build settings
 markdown: kramdown
