@@ -11,7 +11,7 @@ paginate: 20
 baseurl: /
 domain_name: 'http://pages.dcog.io'
 google_analytics: 'UA-63530057-2'
-disqus_shortname: 'danielbushman'
+disqus_shortname: 'dcog'
 
 # Details for the RSS feed generator
 url:            'http://pages.dcog.io'
