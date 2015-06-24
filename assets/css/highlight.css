@@ -9,6 +9,7 @@
   background: #272b2d;
   color: #d0d0d0;
   -webkit-text-size-adjust: none;
+  font-size: 100%;
 }
 
 .hljs-shebang,

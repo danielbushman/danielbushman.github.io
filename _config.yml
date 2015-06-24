@@ -1,13 +1,13 @@
-name: DCog
-description: Blogging as distributed cognition.
-meta_description: "DCog. Blogging as distributed cognition."
+name: Daniel Bushman's Blog
+description: Distributed cognition about code.
+meta_description: "Blogging about code."
 
 aboutPage: true
 
 markdown: kramdown
 highlighter: pygments
 
-paginate: 20
+paginate: 5
 baseurl: /
 domain_name: 'http://pages.dcog.io'
 google_analytics: 'UA-63530057-2'
@@ -19,6 +19,9 @@ author:         'Daniel Bushman'
 authorTwitter:  'danielbushman'
 
 permalink:       /:year/:title/
+
+exclude: ["pages.dcog.io.sublime-project", "pages.dcog.io.sublime-workspace"]
+timezone: America/Boise
 
 defaults:
     -

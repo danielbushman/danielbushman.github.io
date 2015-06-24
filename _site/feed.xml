@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>DCog</title>
-    <description>Blogging as distributed cognition.</description>
+    <title>Daniel Bushman&#39;s Blog</title>
+    <description>Distributed cognition about code.</description>
     <link>http://pages.dcog.io</link>
     <atom:link href="http://pages.dcog.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Markdown?</title>
+        
+        
+          <description>&lt;p&gt;This note demonstrates some of what [Markdown][1] is capable of doing.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 22 Jun 2015 20:50:22 -0600</pubDate>
+        <link>http://pages.dcog.io/2015/markdown/</link>
+        <guid isPermaLink="true">http://pages.dcog.io/2015/markdown/</guid>
+      </item>
     
       <item>
         <title>Welcome to Jekyll!</title>
         
         
           <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
-To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt;.&lt;/p&gt;
 
 </description>
         
