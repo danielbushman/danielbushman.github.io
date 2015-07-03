@@ -1,26 +1,26 @@
-name: Daniel Bushman's Blog
+name: dcog.io 
 description: Distributed cognition about code.
 meta_description: "Blogging about code."
 
-aboutPage: true
+aboutPage: false
 
 markdown: kramdown
 highlighter: pygments
 
 paginate: 5
 baseurl: /
-domain_name: 'http://pages.dcog.io'
+domain_name: 'http://dcog.io'
 google_analytics: 'UA-63530057-2'
 disqus_shortname: 'dcog'
 
 # Details for the RSS feed generator
-url:            'http://pages.dcog.io'
+url:            'http://dcog.io'
 author:         'Daniel Bushman'
 authorTwitter:  'danielbushman'
 
 permalink:       /:year/:title/
 
-exclude: ["pages.dcog.io.sublime-project", "pages.dcog.io.sublime-workspace"]
+exclude: ["stories.dcog.io.sublime-project", "stories.dcog.io.sublime-workspace", "blog.oo3"]
 timezone: America/Boise
 
 defaults:

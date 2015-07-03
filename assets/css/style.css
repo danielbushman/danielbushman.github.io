@@ -69,11 +69,12 @@ h1 {
 	font-size: 48px;
 }
 
-h1.huge {
+h1.banner {
 	font-family: 'PT Sans', sans-serif;
+	/*text-align: center;*/
 	font-weight: 400;
-	font-size: 120px;
-	color: #666;
+	font-size: 80px;
+	color: #BBB;
 }
 
 h2 {
@@ -130,7 +131,7 @@ nav.main-nav {
 	background: #fff;
 	background: rgba(255,255,255,.90);
 	margin: 0 auto;
-	text-align: right;
+	text-align: left;
 	/*position: fixed;*/
 	z-index: 100;
 }
@@ -165,7 +166,8 @@ nav.main-nav a.cta {
 }
 
 .home #avatar {
-	float: right;
+	float: left;
+	position: ;
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
