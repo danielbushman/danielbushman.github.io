@@ -1,26 +1,28 @@
-name: dcog.io 
-description: Distributed cognition about code.
-meta_description: "Blogging about code."
+name: uxdev.io
+description: Developer Experience Design
+meta_description: "Blogging about code and user experience."
 
 aboutPage: false
 
 markdown: kramdown
+kramdown:
+  input: GFM
 highlighter: pygments
 
 paginate: 5
 baseurl: /
-domain_name: 'http://dcog.io'
+domain_name: 'http://uxdev.io'
 google_analytics: 'UA-63530057-2'
-disqus_shortname: 'dcog'
+disqus_shortname: 'uxdevio'
 
 # Details for the RSS feed generator
-url:            'http://dcog.io'
+url:            'http://uxdev.io'
 author:         'Daniel Bushman'
 authorTwitter:  'danielbushman'
 
 permalink:       /:year/:title/
 
-exclude: ["stories.dcog.io.sublime-project", "stories.dcog.io.sublime-workspace", "blog.oo3"]
+exclude: [""blog.oo3"]
 timezone: America/Boise
 
 defaults:
