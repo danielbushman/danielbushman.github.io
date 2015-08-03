@@ -22,7 +22,7 @@ authorTwitter:  'danielbushman'
 
 permalink:       /:year/:title/
 
-exclude: [""blog.oo3"]
+exclude: ["blog.oo3"]
 timezone: America/Boise
 
 defaults:
