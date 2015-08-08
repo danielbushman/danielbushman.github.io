@@ -1,8 +1,8 @@
 name: uxdev.io
-description: Developer Experience Design
+description: Developer Experience Evangalist
 meta_description: "Blogging about code and user experience."
 
-aboutPage: false
+aboutPage: true
 
 markdown: kramdown
 kramdown:
@@ -18,7 +18,7 @@ disqus_shortname: 'uxdevio'
 # Details for the RSS feed generator
 url:            'http://uxdev.io'
 author:         'Daniel Bushman'
-authorTwitter:  'danielbushman'
+authorTwitter:  '_uxdev'
 
 permalink:       /:year/:title/
 

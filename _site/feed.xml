@@ -2,9 +2,36 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>uxdev.io</title>
-    <description>Developer Experience Design</description>
+    <description>Developer Experience Evangalist</description>
     <link>http://uxdev.io</link>
     <atom:link href="http://uxdev.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Developer Experience Design</title>
+        
+        
+          <description>&lt;h1 id=&quot;be-designer-friendly-or-die&quot;&gt;Be designer friendly, or die&lt;/h1&gt;
+&lt;p&gt;Giving lip service to the importance of UX is so old that it’s become an unwritten rule. It’s always implied that making the user happy is at the core of business success. Yet lip service is lip service and there’s real business to attend oto.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 03 Aug 2015 00:00:00 -0600</pubDate>
+        <link>http://uxdev.io/2015/developer-experience-design/</link>
+        <guid isPermaLink="true">http://uxdev.io/2015/developer-experience-design/</guid>
+      </item>
+    
+      <item>
+        <title>Reactive Programming is people!</title>
+        
+        
+          <description>&lt;h2 id=&quot;everything-and-nothing-is-always-new-in-computer-science&quot;&gt;Everything and nothing is always new in Computer Science.&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Fri, 03 Jul 2015 00:00:00 -0600</pubDate>
+        <link>http://uxdev.io/2015/reactive-programming/</link>
+        <guid isPermaLink="true">http://uxdev.io/2015/reactive-programming/</guid>
+      </item>
     
       <item>
         <title>Initial commit</title>
