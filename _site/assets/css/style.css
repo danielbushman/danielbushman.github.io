@@ -10,6 +10,11 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 }
 .hidden { display: none; }
 
+/*widgets*/
+script {
+	float: left;
+}
+
 /* Icons */
 @font-face {
 	font-family: 'icons';
@@ -85,7 +90,7 @@ h2 {
 
 .profile #wrapper {
 	padding: 100px 40px 0px;
-	max-width: 800px;
+	max-width: 1000px;
 	margin: 0 auto;
 }
 
@@ -154,7 +159,7 @@ nav.main-nav a.cta {
 }
 
 #wrapper {
-  max-width: 800px;
+  /*max-width: 800px;*/
   margin: 0 auto;
   padding: 0 40px 100px 40px;
 }
@@ -173,7 +178,7 @@ nav.main-nav a.cta {
 }
 
 a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 /* Typography */
@@ -183,7 +188,7 @@ a {
 #post-list a:hover,
 #post-list li:hover .dates,
 #title:hover {
-	
+
 	color: #5694f1;
 }
 
@@ -192,8 +197,8 @@ p {
 	letter-spacing: -0.5px;
 }
 
-#post-body a { 
-	color: #667; 
+#post-body a {
+	color: #667;
 	text-decoration: none;
 	background-image: linear-gradient(to bottom, rgba(0,0,0,0) 75%, #667 75%);
 	background-size: 2px 2px;
@@ -284,7 +289,7 @@ em, i { font-style: italic; }
 
 .inverse.post header .faux-wrapper {
   max-width: 990px;
-  margin: 0 auto;	
+  margin: 0 auto;
   padding: 0 40px;
 }
 
@@ -338,7 +343,7 @@ em, i { font-style: italic; }
 
 .post ol li {
 	list-style-type: decimal;
-	list-style-position: 
+	list-style-position:
 }
 
 .post ol,
@@ -369,16 +374,16 @@ em, i { font-style: italic; }
 	margin-top: 2px;
 }
 
-h3, h4, h5 { 
-	color:#AAA; 
+h3, h4, h5 {
+	color:#AAA;
 }
 
 h3 {
 	/*font-style: italic; */
-	font-size:20px; 
-	font-family: 'Lato', sans-serif; 
-	font-weight: 700; 
-	margin: 20px 0 0; 
+	font-size:20px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+	margin: 20px 0 0;
 	line-height: 1.4;
 }
 
@@ -416,8 +421,8 @@ strike span {
 }
 
 code {
-	font-family:Menlo, Monaco, Courier; 
-	background-color:#EEE; 
+	font-family:Menlo, Monaco, Courier;
+	background-color:#EEE;
 	font-size: 70%;
 }
 h3 code {
@@ -436,10 +441,10 @@ blockquote p {
 	margin: 60px 0px;
 	color: #333;
 	margin: 40px 20px;
-	text-align: center;
+	text-align: left;
 	line-height: 1.4;
 	padding: 0;
-	letter-spacing: -2.5px;
+	letter-spacing: -2px;
 	/*letter-spacing: .01rem;*/
 	/*display: block;*/
 }
