@@ -114,6 +114,31 @@
 
 <h2 id="gists">Gists</h2>
 
+<noscript><pre>#!/usr/bin/env bash
+
+# gist at https://gist.github.com/miebach/7391024
+
+# save this file to .git/hooks/post-checkout 
+# and also to .git/hooks/post-merge
+# and make it executable
+
+# Delete .pyc files and empty directories from root of project
+cd ./$(git rev-parse --show-cdup)
+
+# Clean-up
+find . -name &quot;.DS_Store&quot; -type f | xargs rm -f
+
+NUM_PYC_FILES=$( find . -name &quot;*.pyc&quot; -type f | wc -l | tr -d &#39; &#39; )
+if [ $NUM_PYC_FILES -gt 0 ]; then
+    find . -name &quot;*.pyc&quot; -type f | xargs rm -f
+    printf &quot;\e[00;31mDeleted $NUM_PYC_FILES .pyc files\e[00m\n&quot;
+fi
+
+NUM_EMPTY_DIRS=$( find . -type d -empty | wc -l | tr -d &#39; &#39; )
+if [ $NUM_EMPTY_DIRS -gt 0 ]; then
+    find . -type d -empty -type f | xargs rm -f
+    printf &quot;\e[00;31mDeleted $NUM_EMPTY_DIRS empty directories\e[00m\n&quot;
+fi</pre></noscript>
 <script src="https://gist.github.com/danielbushman/92c2a7a88512f05e6e92.js"> </script>
 
 <h2 id="horizontal-rule">Horizontal rule</h2>
@@ -140,7 +165,7 @@
 
     <div class="archive readmore">
         <section id="sharing">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=//2015/markdown/ - Markdown? by @danielbushman"><span class="icon-twitter"> Tweet</span></a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=//2015/markdown/ - Markdown? by @_uxdev"><span class="icon-twitter"> Tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(
