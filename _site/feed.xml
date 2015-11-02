@@ -6,5 +6,18 @@
     <link>http://uxdev.io</link>
     <atom:link href="http://uxdev.io/feed.xml" rel="self" type="application/rss+xml" />
     
+      <item>
+        <title>Reactive Programming is people!</title>
+        
+        
+          <description>&lt;h2 id=&quot;everything-and-nothing-is-always-new-in-computer-science&quot;&gt;Everything and nothing is always new in Computer Science.&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Fri, 03 Jul 2015 00:00:00 -0600</pubDate>
+        <link>http://uxdev.io/2015/reactive-programming/</link>
+        <guid isPermaLink="true">http://uxdev.io/2015/reactive-programming/</guid>
+      </item>
+    
   </channel>
 </rss>
