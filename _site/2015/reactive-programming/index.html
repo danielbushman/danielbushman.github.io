@@ -17,7 +17,7 @@
 
   <nav class="main-nav">
     
-        <a href='/'> <span class="arrow">←</span> All Stories </a>
+        <a href='/'> <span class="arrow">←</span> Daniel Bushman</a>
     
 </nav>
 
@@ -56,16 +56,10 @@
 
 <p>Yet when most people use the term Reactive today, it’s more conceptually related to this manifesto than to pure Functional Reactive Programming.</p>
 
-<p>There are those of the Functional religion that hate that fact and will speak at length about how wrong and unjust it is. If that sort of conversation interests you, then I urge you to stop reading here and go read what they have to say. I don’t have a link for you. Just keep going strait, then turn at the message boards — can’t miss it.</p>
-
 <p>There is a practical tutorial that’s appropriately titled: <a href="http://xgrommx.github.io/rx-book/content/guidelines/introduction/index.html">The introduction to Reactive Programming you’ve been missing</a>, but it covers only a cross-section of the bigger picture, and is limited to just one Reactive JavaScript library — though RxJS <em>is</em> an excellent library. The tutorial is particularly useful because in addition to showing real examples, it uses visualizations to help us get our mind around it conceptually. I also agree with him:</p>
 
 <blockquote>
   <p>The hardest part is learning to think in Reactive.</p>
-</blockquote>
-
-<blockquote>
-  <p><img src="/assets/images/false-reactive-doesnt-exist.jpg" alt="False. Reactive doesn't exist" /></p>
 </blockquote>
 
 <p>RxJS is just one of the <a href="https://github.com/Reactive-Extensions">Reactive Extensions libraries</a> born from Microsoft’s Cloud Programmability Group – which also helped bring the word <em>Reactive</em> into broader use.</p>
@@ -78,11 +72,11 @@
 
 <h2 id="what-is-data-for">What is data <em>for</em>?</h2>
 
-<p>Let’s take a step back and remember that databases are inventions to meet particular needs. We should use data in the way that best serves our purposes. We all know what Moore’s law is, and how rapidly technology advances in general. Looking at the state of the art gives us new ways we can use data.</p>
+<p>We all know how rapidly technology is advancing. Though we are beginning to run up against some boundaries with scaling systems vertically. Looking at the state of the art offers us some new ways we can get a surprising level of both consistency <em>and</em> availability while scaling horizontally.</p>
 
-<p>Why do we store data? Fundamentally it’s to persist some state we will later care about. But what <em>information</em> do we actually care about? What is normalization <em>for</em> anyway? When I first had normalization explained to me, I thought it was an extremely useful way to have that type of authoritative Single Point Of Truth.</p>
+<p>Why do we store data? Fundamentally it’s to persist some state we will later care about. But what <em>information</em> do we actually care about? What is normalization <em>for</em> anyway? Normalization is an extremely useful way to maintain a Single Point Of Truth, but it comes with it’s own gotchas.</p>
 
-<p>But what makes it authoritative? And with system failure being an eventual certainty, why in practice is a Single Point Of Truth desirable? When as soon as we introduce any sort of replication to survive failure, we give up at least some of the consistency that comes along with normalization [explain]. More significantly, this view on authority assumes that the stored values were derived without error.</p>
+<p>What makes its Truth authoritative? Using normalization as a way to manage Truth comes with the huge unspoken assumption that the stored information was derived without error. Does the information being correct have anything to do with how we store it?</p>
 
 <p>Imagine if we could time-travel. Going back in time to witness what actually happened would be the ultimate in reliable authority.</p>
 
@@ -90,13 +84,11 @@
   <p>Giving new meaning to “Single Point Of Truth”.</p>
 </blockquote>
 
-<p>In the past, most strategies for storing data were arrived at simply out of necessity, in order to have persistence within the constraints of very limited resources. How long ago was it that the available memory and processing power wouldn’t have been able to <code>SELECT * FROM beaches;</code> even with unlimited patience and being willing to risk data loss, because the hardware simply wouldn’t allow it? Yet today we can <code>SELECT * FROM galaxies;</code> in less time than it takes to double click. (See what I did there? Yeah. Sorry.) And with replication and high-availability we can safely ensure persistence even if something does go wrong in those few milliseconds.</p>
-
-<p>But what about accounting errors, so to speak? If we overwrite the spot we’re using as a Single Point Of Truth with incorrect data, a strategy is needed to somehow figure out what the correct value should be and fix it. For any given strategy, how many metaphorical accountants does it take to audit and repair all the incorrect data? Going back in time to correct the mistake is starting to sound pretty appealing.</p>
+<p>What about accounting errors? If we overwrite the data we’re using as a Single Point Of Truth with incorrect information, a strategy is needed to somehow figure out what the correct values should be and fix it. For any given strategy, how many metaphorical accountants does it take to audit and repair all the incorrect data? Going back in time to correct the mistake is starting to sound pretty appealing.</p>
 
 <h2 id="i-want-answers">I want answers.</h2>
 
-<p>We store data because at some future date a question will be asked, and we want to be able to come up with the right answer. That’s why queries are called queries, obviously. How can we write a query without knowing what question will be asked? And if we can see ahead and know what the question will be, why do we wait to ask it? In the past this was partly due to the limited resources and especially due to the extreme number of permutations which are caused by introducing only a few variables into the query.</p>
+<p>We store data because at some future date a question will be asked, and we want to be able to provide with the right answer. That’s why queries are called queries, obviously. How can we write a query without knowing what question will be asked? And if we can see ahead and know what the question will be, why do we wait to ask it? In the past this was partly due to the limited resources and especially due to the extreme number of permutations which are caused by introducing only a few variables into the query.</p>
 
 <blockquote>
   <p><img src="/assets/images/what-if-i-told-you.jpg" alt="What if I told you stream processing can replace queries" /></p>
@@ -126,17 +118,13 @@
   <p><a href="http://queue.acm.org/detail.cfm?id=1563874"><img src="http://deliveryimages.acm.org/10.1145/1570000/1563874/jacobs3.jpg" alt="Graph showing sequential disk operations measured as faster than in-memory operations." /></a></p>
 </blockquote>
 
-<p>Taking advantage of this, Kafka manages to be so fast that almost always the bottleneck is <em>not</em> the filesystem, it’s network access.</p>
+<p>Taking advantage of this, Kafka manages to be so fast that the filesystem is almost never the bottleneck, it’s network access.</p>
 
 <p>To put a nice bow on it, if you’re not already using a binary serialization format like Avero to get smaller faster messages, Kafka uses end-to-end batch compression, on disk and over the network, until messages reach their final destination and are decompressed by the consumer. Batch compression takes advantage of the fact that among messages with a similar JSON schema, for example, a significant percentage of the required memory is due to the repetition of key names.</p>
 
-<p>Given all this, we’re talking about stream data which can flow orders of magnitude faster.</p>
+<p>Given all this, we’re talking about stream of data which can flow orders of magnitude faster.</p>
 
-<p>I took this detour of diving into how Kafka is designed, because It’s <em>very</em> significant to understand how fast Kafka is. Otherwise, these new approaches to thinking about data seem absolutely fanciful.</p>
-
-<blockquote>
-  <p><img src="/assets/images/wiz-of-oz-runs-github.jpg" alt="What if Reactive isn't real and GitHub is run by a wizard behind a curtain?" /></p>
-</blockquote>
+<p>I took this detour of diving into how Kafka is designed, because It’s <em>very</em> significant to understand how fast Kafka is. Otherwise, these new approaches to thinking about data seem rather fanciful.</p>
 
 <h1 id="just-the-facts">Just the facts</h1>
 
@@ -158,29 +146,19 @@
 
 <p>But with immutability, since we <em>can’t</em> change the facts, multiple threads or even different nodes all over the galaxy can respond to them however they want, in their own context, without creating first-order dependencies.</p>
 
-<p>This concept of <em>facts</em> which are true regardless of when and where we come across them is extremely powerful all on it’s own, even if it were to come at a cost to performance and efficiency. Yet, the opposite is actually true — 4 out of 5 computers prefer immutable data.</p>
-
-<p>[tighten this up and focus it]</p>
-
-<p>If an object is immutable, that means that the pointer to the object can confidently be passed around and compared without the overhead of dealing with the associated data. This is just one example of how immutable data can lead to <em>significant</em> performance gains.</p>
+<p>This concept of <em>facts</em> which are true regardless of when and where we come across them is extremely powerful all on it’s own, even if it were to come at a cost to performance and efficiency. Yet, the opposite is actually true — using immutable data can lead to <em>significant</em> performance gains.</p>
 
 <blockquote>
   <p><img src="/assets/images/4-out-of-5-algorithms.jpg" alt="4 out of 5 algorithms prefer immutabilityy" /></p>
 </blockquote>
 
-<p>Consider this — the hash on an immutable object is as good as the object itself for every purpose other than accessing its data. [need examples]</p>
+<p>And just when you thought this deal couldn’t get any sweeter, not only do computers and distributed systems function more efficiently with immutable data, it can actually help <em>computer programmers</em> work much more effectively! Sound to good to be true? Immutable data makes it easier to write cleanly <em>composable</em> components.</p>
 
-<p>[this needs to be refined to make the point]</p>
-
-<p>To understand how this relates to efficiency, consider this — if I have an immutable list of pointers to immutable objects, then operations on the list of objects is just as efficient as operations on a list of numbers. And copying the list in order to create a new immutable list is incredibly efficient.</p>
+<p>That’s a pretty big deal.</p>
 
 <blockquote>
   <p><img src="/assets/images/all-the-things-immutable.jpg" alt="All the things immutable!" /></p>
 </blockquote>
-
-<p>And just when you thought this deal couldn’t get any sweeter, not only do computers and distributed systems function more efficiently with immutable data, it can actually help <em>computer programmers</em> work much more effectively! Sound to good to be true? Immutable data makes it easier to write cleanly <em>composable</em> components.</p>
-
-<p>That’s a pretty big deal.</p>
 
 <h2 id="what-does-composable-mean">What does composable mean?</h2>
 
@@ -194,13 +172,9 @@
   <p><img src="/assets/images/shared-mutable-state.jpg" alt="Shared mutable state is bad, mmkay?" /></p>
 </blockquote>
 
-<p>It <em>is</em> important to understand how state <em>isolation</em> helps us with clean composition, and in which cases immutability gives us a performance boost, with or without isolation. But once we understand those things we know enough to mutate responsibly, if we choose to. <em>We can keep state changes cleanly contained within our components.</em> So let’s not start making a dogma of immutability, and just remember why it’s so awesome.</p>
+<p>It <em>is</em> important to understand how state <em>isolation</em> helps us with clean composition, and in which cases immutability gives us a performance boost, with or without isolation. But once we understand those things we know enough to mutate responsibly. Lets just keep our state changes cleanly contained within a given component.</p>
 
 <p>One of the many strengths of <a href="https://facebook.github.io/react/">Facebook’s React JS</a> library is that with a little guidance it’s easy to make composable components with it. And then Facebook really drives home the power of clean composition by introducing <a href="https://youtu.be/9sc8Pyc51uU?t=37s">GraphQL and Relay</a>. GraphQL and Relay illustrate very well how clean composition simplifies managing the state of a complex tree of components. The result is astonishingly elegant — elegant enough that it doesn’t take being a hard-core functional programmer for it to click.</p>
-
-<blockquote>
-  <p><img src="/assets/images/a-library-for-ants.jpg" alt="What is this, a library for ants?" /></p>
-</blockquote>
 
 <p>Being composable also goes hand in hand with <a href="http://www.faqs.org/docs/artu/ch04s02.html">Compactness</a>, allowing otherwise unwieldy problem domains to easily fit in a person’s head, one nested branch at a time. One of the things that Reactive gets right, or any good programming paradigm, is that it recognizes that code will be written by human beings, and that to be successful it must thrive in the context of a human brain’s workday.</p>
 
@@ -226,33 +200,13 @@
 
 <p>Containers make it much easier to be elastic than with VMs. Spinning up new containers is simple and quick. Responsive just-in-time scaling is completely realistic and natural.</p>
 
-<blockquote>
-  <p><img src="/assets/images/wiz-of-oz-runs-github.jpg" alt="what if reactive programming isn't real?" /></p>
-</blockquote>
-
 <p>Gilt is an excellent example of this in action. Their business model is based around flash discount sales which are released once a day at the same time each day. Nearly all of their daily traffic hits them in less than an hour, and so they use Docker to be as elastic as they need to be. And when it’s over, they snap back to handling the lower load as quickly and efficiently as they elastically stretched out. The rest of the day they are not paying for a bunch of unused nodes.</p>
 
 <p>Being distributed and elastic like that means the ability to stretch out to handle increased load anywhere in the world, on-demand, as cost-effectively as possible.</p>
 
-<h3 id="couchbase-ring-distribution-and-version">Couchbase ring distribution and version</h3>
-
-<p>There is always the trade-off between immediacy and consistency. Database transactions are a case built example of trading immediacy for consistency. People often use banks to describe situations fit for transactions, but banks are actually a great example of immediacy often being put in favor of consistency.</p>
-
-<p>Since Couchbase can store the log offset we can know exactly how far we need to go back.</p>
-
 <h2 id="non-blocking-and-asynchronous">Non-blocking and asynchronous</h2>
 
 <p>As if time travel weren’t a good enough way to decouple from time, let’s also make sure our code is non-blocking and entirely at home in an asynchronous world. One of the biggest gains we get from Reactive Programming is that it makes it very easy to handle asynchronous data. In fact, it essentially lets you work with data without caring much about whether it’s synchronous or not.</p>
-
-<blockquote>
-  <p>I was into breaking the laws of physics before it was cool.</p>
-</blockquote>
-
-<h3 id="concurrency">Concurrency</h3>
-
-<h3 id="fault-isolation">Fault isolation</h3>
-
-<h1 id="reactive-programming">Reactive Programming</h1>
 
 <h2 id="declarative-vs-imperative">Declarative vs imperative</h2>
 
@@ -266,34 +220,16 @@
   <p>At the core of Reactive Programming is the combination of using observables with iterators to lazily process any length collection, of any type, asynchronously.</p>
 </blockquote>
 
-<p>Did you get that? Enough theory, time for actual examples!</p>
-
 <blockquote>
   <p><img src="/assets/images/backtofuturereal_o_158148.jpg" alt="back to the future is real" /></p>
 </blockquote>
-
-<h2 id="maintainable">Maintainable</h2>
-
-<h2 id="bounded-context">Bounded context</h2>
-
-<h2 id="talent-acquisition-and-retention">Talent acquisition and retention.</h2>
-
-<h1 id="reactive-systems">Reactive <em>systems</em></h1>
-
-<h2 id="separation-of-concerns">Separation of concerns</h2>
-
-<h2 id="unidirectional-data-flow-vs-two-way-binding">Unidirectional data flow vs two-way binding</h2>
-
-<h2 id="directed-graphs">Directed graphs</h2>
-
-<p>Are easy to cleanly compose.</p>
 
 <h2 id="microservices">Microservices</h2>
 
 <p>Compactness in the flesh. I think it’s easier to think of <em>compactness</em> as the <em>bounded context</em> of the smallest reasonable problem domain.</p>
 
 <blockquote>
-  <p>It’s still true. Everything and nothing is always new in Computer Science.</p>
+  <p>Everything and nothing is always new in Computer Science.</p>
 </blockquote>
 
 <p>Microservices are yet another thing that’s new, but not really. Just like Reactive, the concept is interesting only within the context of why it’s trending again. It’s interesting because of the things which are trending along with it.</p>
@@ -304,7 +240,7 @@
 
 <h2 id="immutable-infrastructure-and-continuous-delivery">Immutable infrastructure and continuous delivery</h2>
 
-<p>Remember all those benefits of using immutable data? Some of those same benefits also apply if we don’t ever change the code in any container in an infrastructure, effectively treating the code as immutable. [prove it]</p>
+<p>Remember all those benefits of using immutable data? Some of those same benefits also apply if we don’t ever change the code in any container in an infrastructure, effectively treating the code as immutable.</p>
 
 <p>Pass the same immutable facts through the same immutable code, and we’ll get exactly the same result.</p>
 
@@ -314,44 +250,12 @@
 
 <p>And throughout this whole transition we have the confidence that comes from owning a time machine.</p>
 
-<h2 id="providing-sdk-for-your-services">Providing SDK for your services</h2>
-
-<h3 id="fault-tolerance">Fault-tolerance</h3>
-
-<p>Chaos Monkey.</p>
-
-<h1 id="reactive-testing">Reactive Testing</h1>
-
-<p>Last but not least, this all makes testing easier. If we test the framework well which allows us to write declaratively, then there is less to test regarding our specific use of the framework.</p>
-
-<p>The things we get with Reactive are like a fantasy wish list. It achieves this through the magic of making that list part of it’s very definition. If it’s not doing them, then it’s not Reactive.</p>
-
-<p>The beauty is that it’s not a wish list—it’s a candy store. There are already a wide array of field-tested tools and processes to choose from. This isn’t theoretical stuff, we’ll look at a given set of some specific tools to realize these promises.</p>
-
-<h1 id="from-kafka-storm-to-d3-and-back-again">From Kafka [Storm?] to D3 and back again</h1>
-<p><em>“In theory, there is no difference between theory and practice. But, in practice, there is.”</em><br /><br />
+<p><em>“In theory, there is no difference between theory and practice. But, in practice, there is.”</em>
 — Jan L. A. van de Snepscheut</p>
-
-<h2 id="lets-take-it-a-step-at-a-time">Let’s take it a step at a time</h2>
-
-<h3 id="thinking-in-reactive">Thinking in Reactive</h3>
-
-<h3 id="lets-see-some-examples-all-along-the-way">Let’s see some examples (all along the way)</h3>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">visualization</span> <span class="o">=</span> <span class="nx">d3plus</span><span class="p">.</span><span class="nx">viz</span><span class="p">()</span>
-  <span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">&quot;#viz&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">sample_data</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">type</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">id</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">y</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">x</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">attrs</span><span class="p">(</span><span class="nx">attributes</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">color</span><span class="p">(</span><span class="s2">&quot;hex&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">draw</span><span class="p">()</span></code></pre></div>
 
 <h1 id="failure-is-good-adapt">Failure is good. Adapt!</h1>
 
-<p>If you don’t have the urge to rewrite the code you wrote <strike><span>2 years ago</span></strike> 6 months ago, you aren’t keeping up. That’s not to say that you <em>should</em> rewrite it, only that it should make you a little bit itchy to read it.</p>
+<p>If you don’t have the urge to rewrite the code you wrote <strike><span>2 years</span></strike> 6 months ago, you aren’t keeping up. That’s not to say that you <em>should</em> rewrite it, only that it should make you a little bit itchy to read it.</p>
 
 <p>You will fail. There, we got that of the way. You will fail your first time, and you won’t get it right the second time either. Your third attempt will be acceptable, so that your fourth time you can nail it and then go clean up after yourself a little. Plan right now to be prepared for this. It’s okay. You are entering a new world – or maybe just conquering a new challenge. Failure is more than okay — it’s the path to excellence.</p>
 
@@ -371,26 +275,6 @@
 
 <p>Reactive makes Computer Science more fun, but in a very pragmatic way, with big returns. Everybody happy!</p>
 
-<h1 id="notes">Notes</h1>
-
-<h2 id="terminology">Terminology</h2>
-
-<h3 id="component">Component</h3>
-
-<p>I use the word “component” to refer to something that’s cleanly composable, though that is not a necessarily an established convention. Facebook uses “component” to refer to their composable UI elements and the word seems fitting to me. It makes it easier to discuss good composition when you have a word for something which is cleanly composable.</p>
-
-<h3 id="functional">Functional</h3>
-
-<p>Some people use the term “Functional Reactive Programming” quite broadly. This causes confusion both for people in and out of the Functional religion. Reactive borrows many of it’s paradigms from Functional, and can be done in a purely Functional way. But I think calling it functional doesn’t clarify anything. The only thing it would buy us is use of the less ambiguous acronym of FRP.</p>
-
-<h3 id="prepositions-matter">Prepositions matter</h3>
-
-<p>Prepositions used metaphorically for relationships between things in code help reinforce conceptual models. To say a stream <em>passes through</em> iterators is a more natural metaphor than something which suggests that a stream is a stationary atomic unit, such as saying a stream is <em>iterated over</em>.</p>
-
-<h3 id="streams">Streams</h3>
-
-<p>Streams and datastreams can be used interchangeably as far as I’m concerned.</p>
-
         </section>
     </article>
 
@@ -399,35 +283,6 @@
 </footer>
 
 <!-- Disqus comments -->
-
-    <div class="archive readmore">
-        <section id="sharing">
-            <a class="twitter" href="https://twitter.com/intent/tweet?text=//2015/reactive-programming/ - Reactive Programming is people! by @_uxdev"><span class="icon-twitter"> Tweet</span></a>
-
-<a class="facebook" href="#" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;"><span class="icon-facebook-rect"> Share</span>
-</a>
-        </section>
-        <h3>Comments</h3>
-        <section class="disqus">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'uxdevio';
-        var disqus_developer = 0; // developer mode is on
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-    </div>
 
 
 

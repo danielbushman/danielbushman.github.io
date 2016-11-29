@@ -5,7 +5,7 @@ description: I stream. You stream...
 
 ## Everything and nothing is always new in Computer Science.
 
-You could easily say that there is nothing new about Reactive Programming, and you'd be mostly right. But you'd also be wrong. Let's look into why some [very smart][1] and [accomplished][2] people are using "Reactive" as the buzzword *du jour* to refer to the loosely defined paradigm which is making the industry's leading edge like [Facebook][3], [Netflix][4], and [LinkedIn][5] so relevant. 
+You could easily say that there is nothing new about Reactive Programming, and you'd be mostly right. But you'd also be wrong. Let's look into why some [very smart][1] and [accomplished][2] people are using "Reactive" as the buzzword *du jour* to refer to the loosely defined paradigm which is making the industry's leading edge like [Facebook][3], [Netflix][4], and [LinkedIn][5] so relevant.
 
 ### TL;DR:
 
@@ -23,13 +23,9 @@ There is [The Reactive Manifesto][6], but it's reminiscent of the [Manifesto for
 
 Yet when most people use the term Reactive today, it's more conceptually related to this manifesto than to pure Functional Reactive Programming.
 
-There are those of the Functional religion that hate that fact and will speak at length about how wrong and unjust it is. If that sort of conversation interests you, then I urge you to stop reading here and go read what they have to say. I don't have a link for you. Just keep going strait, then turn at the message boards --- can't miss it.
-
 There is a practical tutorial that's appropriately titled: [The introduction to Reactive Programming you've been missing][8], but it covers only a cross-section of the bigger picture, and is limited to just one Reactive JavaScript library --- though RxJS *is* an excellent library. The tutorial is particularly useful because in addition to showing real examples, it uses visualizations to help us get our mind around it conceptually. I also agree with him:
 
 > The hardest part is learning to think in Reactive.
-
-> ![False. Reactive doesn't exist](/assets/images/false-reactive-doesnt-exist.jpg)
 
 RxJS is just one of the [Reactive Extensions libraries](https://github.com/Reactive-Extensions) born from Microsoft's Cloud Programmability Group -- which also helped bring the word *Reactive* into broader use.
 
@@ -52,23 +48,21 @@ Once you get through the learning curve of the initial paradigm shift, it's hard
 
 ## What is data *for*?
 
-Let's take a step back and remember that databases are inventions to meet particular needs. We should use data in the way that best serves our purposes. We all know what Moore's law is, and how rapidly technology advances in general. Looking at the state of the art gives us new ways we can use data.
+We all know how rapidly technology is advancing. Though we are beginning to run up against some boundaries with scaling systems vertically. Looking at the state of the art offers us some new ways we can get a surprising level of both consistency *and* availability while scaling horizontally.
 
-Why do we store data? Fundamentally it's to persist some state we will later care about. But what *information* do we actually care about? What is normalization *for* anyway? When I first had normalization explained to me, I thought it was an extremely useful way to have that type of authoritative Single Point Of Truth.
+Why do we store data? Fundamentally it's to persist some state we will later care about. But what *information* do we actually care about? What is normalization *for* anyway? Normalization is an extremely useful way to maintain a Single Point Of Truth, but it comes with it's own gotchas.
 
-But what makes it authoritative? And with system failure being an eventual certainty, why in practice is a Single Point Of Truth desirable? When as soon as we introduce any sort of replication to survive failure, we give up at least some of the consistency that comes along with normalization [explain]. More significantly, this view on authority assumes that the stored values were derived without error.
+What makes its Truth authoritative? Using normalization as a way to manage Truth comes with the huge unspoken assumption that the stored information was derived without error. Does the information being correct have anything to do with how we store it?
 
 Imagine if we could time-travel. Going back in time to witness what actually happened would be the ultimate in reliable authority.
 
 > Giving new meaning to "Single Point Of Truth".
 
-In the past, most strategies for storing data were arrived at simply out of necessity, in order to have persistence within the constraints of very limited resources. How long ago was it that the available memory and processing power wouldn't have been able to `SELECT * FROM beaches;` even with unlimited patience and being willing to risk data loss, because the hardware simply wouldn't allow it? Yet today we can `SELECT * FROM galaxies;` in less time than it takes to double click. (See what I did there? Yeah. Sorry.) And with replication and high-availability we can safely ensure persistence even if something does go wrong in those few milliseconds.
-
-But what about accounting errors, so to speak? If we overwrite the spot we're using as a Single Point Of Truth with incorrect data, a strategy is needed to somehow figure out what the correct value should be and fix it. For any given strategy, how many metaphorical accountants does it take to audit and repair all the incorrect data? Going back in time to correct the mistake is starting to sound pretty appealing.
+What about accounting errors? If we overwrite the data we're using as a Single Point Of Truth with incorrect information, a strategy is needed to somehow figure out what the correct values should be and fix it. For any given strategy, how many metaphorical accountants does it take to audit and repair all the incorrect data? Going back in time to correct the mistake is starting to sound pretty appealing.
 
 ## I want answers.
 
-We store data because at some future date a question will be asked, and we want to be able to come up with the right answer. That's why queries are called queries, obviously. How can we write a query without knowing what question will be asked? And if we can see ahead and know what the question will be, why do we wait to ask it? In the past this was partly due to the limited resources and especially due to the extreme number of permutations which are caused by introducing only a few variables into the query.
+We store data because at some future date a question will be asked, and we want to be able to provide with the right answer. That's why queries are called queries, obviously. How can we write a query without knowing what question will be asked? And if we can see ahead and know what the question will be, why do we wait to ask it? In the past this was partly due to the limited resources and especially due to the extreme number of permutations which are caused by introducing only a few variables into the query.
 
 > ![What if I told you stream processing can replace queries](/assets/images/what-if-i-told-you.jpg)
 
@@ -92,15 +86,13 @@ Kafka takes advantage of the fact that *sequential* hard-disk operations can be 
 
 > [![Graph showing sequential disk operations measured as faster than in-memory operations.](http://deliveryimages.acm.org/10.1145/1570000/1563874/jacobs3.jpg)](http://queue.acm.org/detail.cfm?id=1563874)
 
-Taking advantage of this, Kafka manages to be so fast that almost always the bottleneck is *not* the filesystem, it's network access.
+Taking advantage of this, Kafka manages to be so fast that the filesystem is almost never the bottleneck, it's network access.
 
 To put a nice bow on it, if you're not already using a binary serialization format like Avero to get smaller faster messages, Kafka uses end-to-end batch compression, on disk and over the network, until messages reach their final destination and are decompressed by the consumer. Batch compression takes advantage of the fact that among messages with a similar JSON schema, for example, a significant percentage of the required memory is due to the repetition of key names.
 
-Given all this, we're talking about stream data which can flow orders of magnitude faster.
+Given all this, we're talking about stream of data which can flow orders of magnitude faster.
 
-I took this detour of diving into how Kafka is designed, because It's *very* significant to understand how fast Kafka is. Otherwise, these new approaches to thinking about data seem absolutely fanciful.
-
-> ![What if Reactive isn't real and GitHub is run by a wizard behind a curtain?](/assets/images/wiz-of-oz-runs-github.jpg)
+I took this detour of diving into how Kafka is designed, because It's *very* significant to understand how fast Kafka is. Otherwise, these new approaches to thinking about data seem rather fanciful.
 
 # Just the facts
 
@@ -120,27 +112,15 @@ If we could change the facts, then keeping distributed nodes in sync would quick
 
 But with immutability, since we *can't* change the facts, multiple threads or even different nodes all over the galaxy can respond to them however they want, in their own context, without creating first-order dependencies.  
 
-
-
-This concept of *facts* which are true regardless of when and where we come across them is extremely powerful all on it's own, even if it were to come at a cost to performance and efficiency. Yet, the opposite is actually true --- 4 out of 5 computers prefer immutable data.
-
-[tighten this up and focus it]
-
-If an object is immutable, that means that the pointer to the object can confidently be passed around and compared without the overhead of dealing with the associated data. This is just one example of how immutable data can lead to *significant* performance gains.
+This concept of *facts* which are true regardless of when and where we come across them is extremely powerful all on it's own, even if it were to come at a cost to performance and efficiency. Yet, the opposite is actually true --- using immutable data can lead to *significant* performance gains.
 
 > ![4 out of 5 algorithms prefer immutabilityy](/assets/images/4-out-of-5-algorithms.jpg)  
-
-Consider this --- the hash on an immutable object is as good as the object itself for every purpose other than accessing its data. [need examples]
-
-[this needs to be refined to make the point]
-
-To understand how this relates to efficiency, consider this --- if I have an immutable list of pointers to immutable objects, then operations on the list of objects is just as efficient as operations on a list of numbers. And copying the list in order to create a new immutable list is incredibly efficient.
-
-> ![All the things immutable!](/assets/images/all-the-things-immutable.jpg)
 
 And just when you thought this deal couldn't get any sweeter, not only do computers and distributed systems function more efficiently with immutable data, it can actually help *computer programmers* work much more effectively! Sound to good to be true? Immutable data makes it easier to write cleanly *composable* components.
 
 That's a pretty big deal.
+
+> ![All the things immutable!](/assets/images/all-the-things-immutable.jpg)
 
 ## What does composable mean?
 
@@ -152,11 +132,9 @@ The cardinal rule of making a component cleanly composable is: Never let a funct
 
 > ![Shared mutable state is bad, mmkay?](/assets/images/shared-mutable-state.jpg)
 
-It *is* important to understand how state *isolation* helps us with clean composition, and in which cases immutability gives us a performance boost, with or without isolation. But once we understand those things we know enough to mutate responsibly, if we choose to. *We can keep state changes cleanly contained within our components.* So let's not start making a dogma of immutability, and just remember why it's so awesome.
+It *is* important to understand how state *isolation* helps us with clean composition, and in which cases immutability gives us a performance boost, with or without isolation. But once we understand those things we know enough to mutate responsibly. Lets just keep our state changes cleanly contained within a given component.
 
 One of the many strengths of [Facebook's React JS](https://facebook.github.io/react/) library is that with a little guidance it's easy to make composable components with it. And then Facebook really drives home the power of clean composition by introducing [GraphQL and Relay](https://youtu.be/9sc8Pyc51uU?t=37s). GraphQL and Relay illustrate very well how clean composition simplifies managing the state of a complex tree of components. The result is astonishingly elegant --- elegant enough that it doesn't take being a hard-core functional programmer for it to click.
-
-> ![What is this, a library for ants?](/assets/images/a-library-for-ants.jpg)
 
 Being composable also goes hand in hand with [Compactness](http://www.faqs.org/docs/artu/ch04s02.html), allowing otherwise unwieldy problem domains to easily fit in a person's head, one nested branch at a time. One of the things that Reactive gets right, or any good programming paradigm, is that it recognizes that code will be written by human beings, and that to be successful it must thrive in the context of a human brain's workday.
 
@@ -180,29 +158,13 @@ Am I just describing a certain use of virtual machines? Close. A big difference 
 
 Containers make it much easier to be elastic than with VMs. Spinning up new containers is simple and quick. Responsive just-in-time scaling is completely realistic and natural.
 
-> ![what if reactive programming isn't real?](/assets/images/wiz-of-oz-runs-github.jpg)
-
 Gilt is an excellent example of this in action. Their business model is based around flash discount sales which are released once a day at the same time each day. Nearly all of their daily traffic hits them in less than an hour, and so they use Docker to be as elastic as they need to be. And when it's over, they snap back to handling the lower load as quickly and efficiently as they elastically stretched out. The rest of the day they are not paying for a bunch of unused nodes.
 
 Being distributed and elastic like that means the ability to stretch out to handle increased load anywhere in the world, on-demand, as cost-effectively as possible.
 
-### Couchbase ring distribution and version
-
-There is always the trade-off between immediacy and consistency. Database transactions are a case built example of trading immediacy for consistency. People often use banks to describe situations fit for transactions, but banks are actually a great example of immediacy often being put in favor of consistency.
-
-Since Couchbase can store the log offset we can know exactly how far we need to go back.
-
 ## Non-blocking and asynchronous
 
 As if time travel weren't a good enough way to decouple from time, let's also make sure our code is non-blocking and entirely at home in an asynchronous world. One of the biggest gains we get from Reactive Programming is that it makes it very easy to handle asynchronous data. In fact, it essentially lets you work with data without caring much about whether it's synchronous or not.
-
-> I was into breaking the laws of physics before it was cool.
-
-### Concurrency
-
-### Fault isolation
-
-# Reactive Programming
 
 ## Declarative vs imperative
 
@@ -214,33 +176,13 @@ There is a subtle difference between an enumerable type and an observable, and t
 
 > At the core of Reactive Programming is the combination of using observables with iterators to lazily process any length collection, of any type, asynchronously.
 
-Did you get that? Enough theory, time for actual examples!
-
 > ![back to the future is real](/assets/images/backtofuturereal_o_158148.jpg)  
-
-## Maintainable
-
-## Bounded context
-
-## Talent acquisition and retention.
-
-
-
-# Reactive *systems*
-
-## Separation of concerns
-
-## Unidirectional data flow vs two-way binding
-
-## Directed graphs
-
-Are easy to cleanly compose.
 
 ## Microservices
 
 Compactness in the flesh. I think it's easier to think of *compactness* as the *bounded context* of the smallest reasonable problem domain.
 
-> It's still true. Everything and nothing is always new in Computer Science.
+> Everything and nothing is always new in Computer Science.
 
 Microservices are yet another thing that's new, but not really. Just like Reactive, the concept is interesting only within the context of why it's trending again. It's interesting because of the things which are trending along with it.
 
@@ -250,7 +192,7 @@ It's not enough to think of microservices as services with a bounded context. To
 
 ## Immutable infrastructure and continuous delivery
 
-Remember all those benefits of using immutable data? Some of those same benefits also apply if we don't ever change the code in any container in an infrastructure, effectively treating the code as immutable. [prove it]
+Remember all those benefits of using immutable data? Some of those same benefits also apply if we don't ever change the code in any container in an infrastructure, effectively treating the code as immutable.
 
 Pass the same immutable facts through the same immutable code, and we'll get exactly the same result.
 
@@ -260,54 +202,12 @@ We can easily transition smoothly and cautiously to new containers, running side
 
 And throughout this whole transition we have the confidence that comes from owning a time machine.
 
-## Providing SDK for your services
-
-### Fault-tolerance
-
-Chaos Monkey.
-
-
-
-# Reactive Testing
-
-Last but not least, this all makes testing easier. If we test the framework well which allows us to write declaratively, then there is less to test regarding our specific use of the framework.  
-
-The things we get with Reactive are like a fantasy wish list. It achieves this through the magic of making that list part of it's very definition. If it's not doing them, then it's not Reactive.
-
-The beauty is that it's not a wish list---it's a candy store. There are already a wide array of field-tested tools and processes to choose from. This isn't theoretical stuff, we'll look at a given set of some specific tools to realize these promises.
-
-
-
-# From Kafka [Storm?] to D3 and back again
-*"In theory, there is no difference between theory and practice. But, in practice, there is."*<br />
+*"In theory, there is no difference between theory and practice. But, in practice, there is."*
 --- Jan L. A. van de Snepscheut
-
-## Let's take it a step at a time
-
-### Thinking in Reactive
-
-### Let's see some examples (all along the way)
-
-{% highlight javascript %}
-var visualization = d3plus.viz()
-  .container("#viz")
-  .data(sample_data)
-  .type("line")
-  .id("name")
-  .y("value")
-  .x("year")
-  .attrs(attributes)
-  .color("hex")
-  .draw()
-{% endhighlight %}
-
-
-
-
 
 # Failure is good. Adapt!
 
-If you don't have the urge to rewrite the code you wrote <strike><span>2 years ago</span></strike> 6 months ago, you aren't keeping up. That's not to say that you *should* rewrite it, only that it should make you a little bit itchy to read it.
+If you don't have the urge to rewrite the code you wrote <strike><span>2 years</span></strike> 6 months ago, you aren't keeping up. That's not to say that you *should* rewrite it, only that it should make you a little bit itchy to read it.
 
 You will fail. There, we got that of the way. You will fail your first time, and you won't get it right the second time either. Your third attempt will be acceptable, so that your fourth time you can nail it and then go clean up after yourself a little. Plan right now to be prepared for this. It's okay. You are entering a new world -- or maybe just conquering a new challenge. Failure is more than okay --- it's the path to excellence.
 
@@ -316,7 +216,6 @@ What have we learned from the Agile Manifesto from 2001? We've learned that it's
 In nature, when a species' habitat changes in a way that threatens their existence, they must migrate, adapt, or die. Watch the tactics of those who are succeeding. Learn from the mistakes of yourself and others. Adapt!
 
 This is one of the beauties of bounded contexts, fault isolation, and time travel. Failure is an option! Establish an environment where it's safe for you and your team to fail, then fail fast and adapt in order to succeed.
-
 
 # I stream. You stream...
 
@@ -327,23 +226,3 @@ I like that I can wrap all the concepts of this whole story in one word. The nex
 Even if it's a fairly contrived wrapper, it's also a nice way to sneak some vegetables into very yummy discussions about fun shiny new things.
 
 Reactive makes Computer Science more fun, but in a very pragmatic way, with big returns. Everybody happy!
-
-# Notes
-
-## Terminology
-
-### Component
-
-I use the word "component" to refer to something that's cleanly composable, though that is not a necessarily an established convention. Facebook uses "component" to refer to their composable UI elements and the word seems fitting to me. It makes it easier to discuss good composition when you have a word for something which is cleanly composable.  
-
-### Functional
-
-Some people use the term "Functional Reactive Programming" quite broadly. This causes confusion both for people in and out of the Functional religion. Reactive borrows many of it's paradigms from Functional, and can be done in a purely Functional way. But I think calling it functional doesn't clarify anything. The only thing it would buy us is use of the less ambiguous acronym of FRP.
-
-### Prepositions matter
-
-Prepositions used metaphorically for relationships between things in code help reinforce conceptual models. To say a stream *passes through* iterators is a more natural metaphor than something which suggests that a stream is a stationary atomic unit, such as saying a stream is *iterated over*.
-
-### Streams
-
-Streams and datastreams can be used interchangeably as far as I'm concerned.
