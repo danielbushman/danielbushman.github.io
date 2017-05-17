@@ -1,0 +1,5 @@
+- GitHub: [danielbushman](https://github.com/danielbushman) | [ux-dev](https://github.com/ux-dev)
+- Medium: [@uxdev](https://medium.com/@uxdev)
+- Twitter: [@_uxdev](https://twitter.com/_uxdev)
+- LinkedIn:  [danielbushman](www.linkedin.com/in/danielbushman)
+- Day Job: [Sling TV](http://sling.com) | [EchoStar](http://echostar.com/)

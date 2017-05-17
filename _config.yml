@@ -38,3 +38,7 @@ defaults:
             type: posts
         values:
             layout: post
+
+title: Daniel Bushman
+show_downloads: true
+theme: jekyll-theme-modernist
