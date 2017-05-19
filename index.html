@@ -1,1 +1,23 @@
-Hi
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daniel Bushman</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+  const test_my_memory = new Vue({
+    el: "#app",
+    template: "<h1>{{ heading }}</h1>",
+    data: {
+      heading: "In the beginning..."
+    }
+  });
+  </script>
+</body>
+</html>
