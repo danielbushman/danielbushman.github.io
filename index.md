@@ -1,4 +1,0 @@
-- GitHub: [danielbushman](https://github.com/danielbushman) 
-- Medium: [@danielbushman](https://medium.com/@danielbushman)
-- Twitter: [@danielbushman](https://twitter.com/danielbushman)
-- LinkedIn:  [danielbushman](www.linkedin.com/in/danielbushman)
